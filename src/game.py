@@ -4,12 +4,12 @@ from enum import Enum
 from random import shuffle
 
 class Color(Enum):
-    RED = 1
-    GREEN = 2
-    BLUE = 3
-    YELLOW = 4
-    WHITE = 5
-    RAINBOW = 6
+    RED = 91
+    GREEN = 92
+    BLUE = 93
+    YELLOW = 94
+    WHITE = 95
+    RAINBOW = 96
 
 Card = namedtuple('Card', ['color', 'rank'])
 
@@ -30,14 +30,13 @@ class Board:
         self.num_bombs = bombs
         self.discards = {}
         self.zones = {color: 0 for color in self.deck.colors}
-        blue_highest_rank = self.zones[Color.BLUE]
 
     def discard(self, card):
         self.discards[card] = self.discards.get(card, 0) + 1
         self.num_clues = min(self.max_clues, self.num_clues + 1)
 
     def play_card(self, card):
-        if self.zones[card.color] = card.rank - 1:
+        if self.zones[card.color] == card.rank - 1:
             self.zones[card.color] += 1
             if card.rank == 5:
                 self.num_clues = min(self.max_clues, self.num_clues + 1)
@@ -45,7 +44,7 @@ class Board:
             self.num_bombs -= 1
             self.discards[card] = self.discards.get(card, 0) + 1
 
-    def give_clue(self, clue):
+    def give_clue(self):
         assert self.num_clues > 0, "Tried to give a clue when there were no available clue tokens!"
         self.num_clues -= 1
 
@@ -65,7 +64,7 @@ class Deck:
         shuffle(self.__shuffled)
 
     def draw_card(self):
-        card_to_deal = self.__shuffled[self.cards_remaining]
-        self.card_counts[card_counts] -= 1
+        card_to_deal = self.__shuffled[self.cards_remaining - 1]
+        self.card_counts[card_to_deal] -= 1
         self.cards_remaining -= 1 
         return card_to_deal
