@@ -2,7 +2,7 @@
 
 import unittest
 
-from firebreak.game import Deck, Color, Card, DEFAULT_COLORS
+from firebreak.game import Deck, Color, Card, DEFAULT_COLORS, Board
 
 class TestGame(unittest.TestCase):
     def test_deck(self):
@@ -38,3 +38,19 @@ class TestGame(unittest.TestCase):
             card_drawn = default_deck.draw_card()
 
         self.assertEqual(default_deck.card_counts[yellow2], 0)
+
+    def test_board(self):
+        # instantiate an instance of a Board
+        clues = 8
+        bombs = 3
+        bored_cat = Board(Deck(), max_clues=clues, bombs=3)
+
+        self.assertEqual(bored_cat.num_clues, clues)
+
+        for i in range(clues):
+            bored_cat.give_clue()
+
+        self.assertEqual(bored_cat.num_clues, 0)
+
+        with self.assertRaises(Exception):
+            bored_cat.give_clue()
