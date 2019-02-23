@@ -64,7 +64,8 @@ class Deck:
         shuffle(self.__shuffled)
 
     def draw_card(self):
+        assert self.cards_remaining > 0, "Tried to draw from an empty deck."
         card_to_deal = self.__shuffled[self.cards_remaining - 1]
         self.card_counts[card_to_deal] -= 1
-        self.cards_remaining -= 1 
+        self.cards_remaining -= 1
         return card_to_deal
