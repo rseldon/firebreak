@@ -23,8 +23,8 @@ DEFAULT_COLOR_COMPOSITION = {
 }
 
 class Board:
-    def __init__(self, deck, max_clues=8, bombs=3):
-        self.deck = deck
+    def __init__(self, deck=None, max_clues=8, bombs=3):
+        self.deck = deck or Deck()
         self.max_clues = max_clues
         self.num_clues = max_clues
         self.num_bombs = bombs
