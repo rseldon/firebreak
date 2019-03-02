@@ -47,6 +47,7 @@ class TestGame(unittest.TestCase):
 
         self.assertEqual(bored_cat.num_clues, clues)
 
+        # clues
         for i in range(clues):
             bored_cat.give_clue()
 
@@ -63,6 +64,18 @@ class TestGame(unittest.TestCase):
 
         self.assertEqual(bored_cat.num_clues, 1)
 
+        bored_cat.give_clue()
+        self.assertEqual(bored_cat.num_clues, 0)
+
+        # Discards
+        for i in range(clues):
+            bored_cat.discard(Card(Color.WHITE, 1))
+            self.assertEqual(bored_cat.num_clues, i+1)
+
+        bored_cat.discard(Card(Color.WHITE, 1))
+        self.assertEqual(bored_cat.num_clues, bored_cat.max_clues)
+
+        # bombs
         self.assertEqual(bored_cat.num_bombs, bombs)
 
         for i in range(bombs):
@@ -70,4 +83,4 @@ class TestGame(unittest.TestCase):
                 bored_cat.play_card(Card(Color.WHITE, 3))
 
         self.assertEqual(bored_cat.num_bombs, 0)
-        
+
