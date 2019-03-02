@@ -68,3 +68,6 @@ class Deck:
         self.card_counts[card_to_deal] -= 1
         self.cards_remaining -= 1
         return card_to_deal
+
+class PlayerHand:
+    pass
