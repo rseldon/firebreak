@@ -54,3 +54,30 @@ class TestGame(unittest.TestCase):
 
         with self.assertRaises(Exception):
             bored_cat.give_clue()
+
+        white1 = Card(Color.WHITE, 1)
+        white2 = Card(Color.WHITE, 2)
+        white3 = Card(Color.WHITE, 3)
+        white4 = Card(Color.WHITE, 4)
+        white5 = Card(Color.WHITE, 5)
+        bored_cat.play_card(white1)
+        bored_cat.play_card(white2)
+        bored_cat.play_card(white3)
+        bored_cat.play_card(white4)
+        bored_cat.play_card(white5)
+
+        self.assertEqual(bored_cat.num_clues, 1)
+
+        self.assertEqual(bored_cat.num_bombs, bombs)
+
+        for i in range(bombs):
+            while bored_cat.num_bombs != 0:
+                bored_cat.play_card(white3)
+                bored_cat.num_bombs -= 1
+
+        self.assertEqual(bored_cat.num_bombs, 0)
+
+        bored_cat.play_card(white2)
+        
+
+
