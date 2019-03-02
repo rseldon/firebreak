@@ -49,7 +49,6 @@ class Board:
         self.num_clues -= 1
 
 
-
 class Deck:
     def __init__(self, colors=DEFAULT_COLORS, color_composition=DEFAULT_COLOR_COMPOSITION):
         self.colors = colors

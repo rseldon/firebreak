@@ -43,44 +43,44 @@ class TestGame(unittest.TestCase):
         # instantiate an instance of a Board
         clues = 8
         bombs = 3
-        bored_cat = Board(Deck(), max_clues=clues, bombs=bombs)
+        board = Board(Deck(), max_clues=clues, bombs=bombs)
 
-        self.assertEqual(bored_cat.num_clues, clues)
+        self.assertEqual(board.num_clues, clues)
 
         # clues
         for i in range(clues):
-            bored_cat.give_clue()
+            board.give_clue()
 
-        self.assertEqual(bored_cat.num_clues, 0)
+        self.assertEqual(board.num_clues, 0)
 
         with self.assertRaises(Exception):
-            bored_cat.give_clue()
+            board.give_clue()
 
-        bored_cat.play_card(Card(Color.WHITE, 1))
-        bored_cat.play_card(Card(Color.WHITE, 2))
-        bored_cat.play_card(Card(Color.WHITE, 3))
-        bored_cat.play_card(Card(Color.WHITE, 4))
-        bored_cat.play_card(Card(Color.WHITE, 5))
+        board.play_card(Card(Color.WHITE, 1))
+        board.play_card(Card(Color.WHITE, 2))
+        board.play_card(Card(Color.WHITE, 3))
+        board.play_card(Card(Color.WHITE, 4))
+        board.play_card(Card(Color.WHITE, 5))
 
-        self.assertEqual(bored_cat.num_clues, 1)
+        self.assertEqual(board.num_clues, 1)
 
-        bored_cat.give_clue()
-        self.assertEqual(bored_cat.num_clues, 0)
+        board.give_clue()
+        self.assertEqual(board.num_clues, 0)
 
         # Discards
         for i in range(clues):
-            bored_cat.discard(Card(Color.WHITE, 1))
-            self.assertEqual(bored_cat.num_clues, i+1)
+            board.discard(Card(Color.WHITE, 1))
+            self.assertEqual(board.num_clues, i+1)
 
-        bored_cat.discard(Card(Color.WHITE, 1))
-        self.assertEqual(bored_cat.num_clues, bored_cat.max_clues)
+        board.discard(Card(Color.WHITE, 1))
+        self.assertEqual(board.num_clues, board.max_clues)
 
         # bombs
-        self.assertEqual(bored_cat.num_bombs, bombs)
+        self.assertEqual(board.num_bombs, bombs)
 
         for i in range(bombs):
-            while bored_cat.num_bombs != 0:
-                bored_cat.play_card(Card(Color.WHITE, 3))
+            while board.num_bombs != 0:
+                board.play_card(Card(Color.WHITE, 3))
 
-        self.assertEqual(bored_cat.num_bombs, 0)
+        self.assertEqual(board.num_bombs, 0)
 
